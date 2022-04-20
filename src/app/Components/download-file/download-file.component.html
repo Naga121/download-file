@@ -1,0 +1,74 @@
+<div class="container">
+  <h1>File Uploading and Doenload</h1>
+  <div class="form">
+    <form [formGroup]="saveFileForm" (ngSubmit)="onSubmit()">
+      <div class="row my-2">
+        <div class="col-md-4 row">
+          <div class="col-md-6">
+            <label for="name">Name</label>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" name="name" formControlName="userName" placeholder="UserName">
+          </div>
+        </div>
+        <div class="col-md-4 row">
+          <div class="col-md-6">
+            <label for="name">Resuma</label>
+          </div>
+          <div class="col-md-6">
+            <input type="file"  #resume accept="application/pdf">
+          </div>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-md-2">
+          <label for="image">Image</label>
+        </div>
+        <div class="col-md-4">
+          <input type="file" #logoInput (change)="onSelectFile($event)" accept="image/*">
+        </div>
+        <div class="col-md-6 my-2">
+          <img [src]="imageUrl" alt="" height="100" width="100">
+        </div>
+      </div>
+      <div class="row my-2" align="center">
+        <button type="submit" class="btn btn-primary w-25" color="primary">Save Details </button>
+     </div>
+    </form>
+  </div>
+  <div class="tableData">
+    <table width="100%" class="responsive-table table-striped table-bordered table-hover">
+      <thead>
+        <tr class="btn-primary" style="height: 40px;">
+            <td>
+                <b>User Name</b>
+            </td>
+            <td>
+                <b>File</b>
+            </td>
+            <td>
+                <b>Image</b>
+            </td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of lstFileDetails">
+        <td>
+          {{item?.userName}}
+        </td>
+        <td>
+          <span class="btn btn-link" (click)="downloadImage(item)" >
+            <img [src]="item?.Image" height="60" width="60">
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-link" (click)="downloadDocFile(item)" >
+            <span class="fa fa-download">{{item?.DocFile}}</span>
+          </button>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
